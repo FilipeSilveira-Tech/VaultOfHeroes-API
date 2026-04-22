@@ -1,0 +1,30 @@
+{
+  "name": "vaultofhero-api",
+  "version": "1.0.0",
+  "description": "Uma API REST desenvolvida em Node.js e Express para gerenciamento de uma loja, herois, itens e guildas. O projeto foca em boas práticas de arquitetura, separação de responsabilidades e operações assíncronas com banco de dados",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "nodemon src/server.js",
+    "db": "node src/database/db.js",
+    "test": "jest --runInBand --detectOpenHandles"
+  },
+  "keywords": [],
+  "author": "Filipe Silveira",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.20.0",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^6.0.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "jest": "^30.3.0",
+    "nodemon": "^3.1.14",
+    "supertest": "^7.2.2"
+  }
+}
