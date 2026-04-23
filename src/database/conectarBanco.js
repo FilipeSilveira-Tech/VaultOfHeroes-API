@@ -1,6 +1,11 @@
-const sqlite3 = require('sqlite3');
-const { open } = require('sqlite');
-const path = require('path');
+import sqlite3 from 'sqlite3';
+import { open } from 'sqlite';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const dbPath = path.resolve(__dirname, 'VaultOfHeroes.db');
 
 async function conectarBanco() {
@@ -9,4 +14,5 @@ async function conectarBanco() {
         driver: sqlite3.Database
     });
 };
-module.exports = conectarBanco;
+
+export default conectarBanco;

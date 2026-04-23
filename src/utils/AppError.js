@@ -5,4 +5,4 @@ class AppError extends Error {
         this.detalhes = detalhes
     }
 }
-module.exports = AppError;
+export default AppError;

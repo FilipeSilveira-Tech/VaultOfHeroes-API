@@ -14,5 +14,8 @@ export const itemSearchId_Scheme = z.object({
 });
 
 export const itemSearchType_Scheme = z.object({
-    type: z.coerce.string()
+    type: z.coerce.string().transform((val) => {
+        console.log("[LOG] Schemas: ", val.trim().charAt(0).toUpperCase() + val.slice(1).toLowerCase()) // -> AQUI
+        return val.trim().charAt(0).toUpperCase() + val.slice(1).toLowerCase();
+    })
 });

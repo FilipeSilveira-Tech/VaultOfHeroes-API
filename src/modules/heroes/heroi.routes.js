@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const heroiController = require('../controllers/heroiController.js');
+const heroiController = require('./heroiController.js');
 
 //const {} = require('../middlewares/heroiMiddleware.js');
 

@@ -1,4 +1,4 @@
-import conectarBanco from '../database/conectarBanco.js';
+import conectarBanco from '../../database/conectarBanco.js';
 
 // Top 5 em prestigio
 export const listaTopGuildaPrestigio = async (req, res) => {

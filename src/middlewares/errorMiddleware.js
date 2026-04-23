@@ -1,4 +1,4 @@
-module.exports = (err, req, res, next) => {
+export default (err, req, res, next) => {
     console.log("‼️ ERRO DETECTADO: ", err.message);
 
     if (err.name === 'ZodError') {

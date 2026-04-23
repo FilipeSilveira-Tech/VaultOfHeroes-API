@@ -1,6 +1,6 @@
 # 🛡️ Vault of Heroes - API de RPG
 
-<img src="./images/apiLogo.png" height="350px" align="right"/>
+<img src="./src/images/apiLogo.png" height="350px" align="right"/>
 
 <p align="left">API REST para gerenciamento de heróis, itens e guildas em um cenário de RPG. O projeto evolui de um modelo inicial monolítico para uma <b>arquitetura modular (MVC)</b>, com separação clara de responsabilidades e foco em manutenção, escalabilidade e legibilidade.</p>
 
@@ -37,22 +37,26 @@ Estrutura baseada em MVC, com responsabilidades bem definidas:
   Organização do projeto em pastas para cada camada.
 
 ```Markdown
-📂src
-┣ 📂controllers
-┣ 📂database
-┣ 📂middlewares
-┣ 📂repositories
-┣ 📂routes
-┣ 📂schemas
-┣ 📂services
-┗ 📂utils
+┣ 📂src
+┃ ┣ 📂config
+┃ ┣ 📂database
+┃ ┣ 📂images
+┃ ┣ 📂middlewares
+┃ ┣ 📂modules
+┃ ┃ ┣ 📂compras
+┃ ┃ ┣ 📂guildas
+┃ ┃ ┣ 📂heroes
+┃ ┃ ┗ 📂items
+┃ ┣ 📂utils
+┃ ┣ 📜app.js
+┃ ┗ 📜server.js
 ```
 ---
 
 
 ## ⚙️ Funcionalidades
 
-<img src="./images/avatar.png" height="350px" align="right" style="border-radius: 15%"/>
+<img src="./src/images/avatar.png" height="350px" align="right" style="border-radius: 15%"/>
 
 ### ⚔️ Itens e Heróis
 - Listagem de itens disponíveis.
