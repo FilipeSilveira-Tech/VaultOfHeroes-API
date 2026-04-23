@@ -34,7 +34,7 @@ Estrutura baseada em MVC, com responsabilidades bem definidas:
   Configuração e acesso centralizado ao SQLite.
 
 - **Organização de Projetos**  
-  Organização do projeto em pastas para cada camada.
+  Organização do projeto em pastas por features
 
 ```Markdown
 ┣ 📂src
@@ -79,8 +79,8 @@ Estrutura baseada em MVC, com responsabilidades bem definidas:
 
 1. **Clone o repositório**
 ```bash
-git clone <LINK_REPOSITORIO>
-cd <NOME_DO_PROJETO>
+git clone https://github.com/FilipeSilveira-Tech/VaultOfHeroes-API.git
+cd VaultOfHeroes-API
 ```
 
 2. **Instale as depedências**
