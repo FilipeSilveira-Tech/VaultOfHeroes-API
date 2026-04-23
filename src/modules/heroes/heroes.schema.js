@@ -1,6 +1,6 @@
-const { z } = require('zod');
+import { z } from 'zod';
 
-const idSchema = z.object({
+export const serachId = z.object({
     id: z.coerce
     .number({
         required_error: "O ID do herói é obrigatório!"
@@ -12,5 +12,3 @@ const idSchema = z.object({
         required_error: "O ID não pode ser negátivo!"
     })
 });
-
-module.exports = { idSchema }
