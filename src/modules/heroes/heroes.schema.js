@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const serachId = z.object({
+export const serachHeroId = z.object({
     id: z.coerce
     .number({
         required_error: "O ID do herói é obrigatório!"

@@ -1,4 +1,4 @@
-import { serachId } from '../modules/heroes/heroes.schema.js';
+import { serachHeroId } from '../modules/heroes/heroes.schema.js';
 
 export const validateHeroId = (req, res, next) => {
     const validResult = serachId.safeParse(req.params);

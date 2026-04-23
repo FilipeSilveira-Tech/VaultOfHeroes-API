@@ -1,8 +1,8 @@
-const conectarBanco = require('../../database/conectarBanco.js');
-const AppError = require('../../utils/AppError.js');
+import conectarBanco from '../../database/conectarBanco.js';
+import AppError from '../../utils/AppError.js';
 
 class VendaRespository {
-    async buscarDadosParaVenda(heroi_id, item_id) {
+    async serachDataForSale(heroi_id, item_id) {
         const db = await conectarBanco();
 
         const heroiReq = await db.get("SELECT * FROM Herois WHERE id = ?", [heroi_id]);
@@ -10,7 +10,7 @@ class VendaRespository {
         return { heroi: heroiReq, item: itemReq}
     }
 
-    async executarTransacaoComprar(heroi_id, item_id, quantidade, newGold, guild_id) {
+    async executePurchase(heroi_id, item_id, quantidade, newGold, guild_id) {
         const db = await conectarBanco();
         await db.run("UPDATE Herois SET gold = ? WHERE id = ?", [newGold, heroi_id]);
 
@@ -36,4 +36,4 @@ class VendaRespository {
     }
 }
 
-module.exports = new VendaRespository();
+export default new VendaRespository();

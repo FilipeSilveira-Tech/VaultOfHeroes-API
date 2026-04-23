@@ -1,13 +1,12 @@
-const express = require('express');
-const router = express.Router();
+import { Router } from 'express';
+const router = Router();
 
 // --- CONTROLLERS ---
-const vendaController = require('./compras.controller.js');
-
+import { buyItem } from './compras.controller.js';
 
 // --- MIDDLEWARE ---
-const { validarVenda } = require('../../middlewares/vendaMiddleware.js');
+import { validarCompra } from '../../middlewares/compras.middleware.js';
 
-router.post('/comprar', validarVenda, vendaController.comprarItem); //
+router.post('/buy', validarCompra, buyItem); //
 
-module.exports = router;
+export default router;

@@ -9,15 +9,15 @@ import logMiddleware from './middlewares/logMiddleware.js';
 app.use(logMiddleware);
 
 // ----- ROUTES -----
-import heroesRoutes from './modules/heroes/heroes.routes.js'; // -> AQUI
-// const guildaRoutes = require('./routes/guildaRouter.js');
+import heroesRoutes from './modules/heroes/heroes.routes.js'; 
+import guildsRoutes from './modules/guildas/guilds.routes.js'; // -> AQUI
 import itemsRoutes from './modules/items/items.routes.js'; 
-// const comprasRoutes = require('./modules/compras/compras.routes.js');
+import comprasRoutes from './modules/compras/compras.routes.js';
 
 app.get('/teste', (req, res) => { res.send('TUDO FUNCIONANDO ✅​') })
 app.use(heroesRoutes);
-// app.use(guildaRoutes);
+app.use(guildsRoutes);
 app.use(itemsRoutes);
-// app.use(comprasRoutes);
+app.use(comprasRoutes);
 
 export default app;

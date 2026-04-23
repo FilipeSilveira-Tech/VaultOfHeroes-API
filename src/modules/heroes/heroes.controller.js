@@ -1,4 +1,3 @@
-import { serachId } from './heroes.schema.js';
 import heroesService from './heroes.service.js';
 
 export const listHeroes = async (req, res) => {
