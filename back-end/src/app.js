@@ -18,7 +18,7 @@ import logsRoutes from "./modules/logs/logs.routes.js";
 
 app.use(
     cors({
-        origin: "http://localhost:5173"
+        origin: "*"
     })
 );
 app.get('/teste', (req, res) => { res.send('TUDO FUNCIONANDO ✅​') })

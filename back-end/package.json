@@ -2,10 +2,10 @@
   "name": "vaultofhero-api",
   "version": "1.0.0",
   "description": "Uma API REST desenvolvida em Node.js e Express para gerenciamento de uma loja, herois, itens e guildas. O projeto foca em boas práticas de arquitetura, separação de responsabilidades e operações assíncronas com banco de dados",
-  "main": "back-end/src/server.js",
+  "main": "src/server.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon back-end/src/server.js"
+    "start": "nodemon src/server.js"
   },
   "keywords": [],
   "author": "Filipe Silveira",
