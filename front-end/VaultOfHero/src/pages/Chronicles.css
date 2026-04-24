@@ -1,0 +1,94 @@
+:root {
+    --bg-dark: #0a0a0c;
+    --panel-bg: rgba(20, 20, 25, 0.92);
+    --gold: #c5a059;
+    --gold-bright: #fceabb;
+    --border-color: #3a2f22;
+    --text-main: #d1d1d1;
+    --text-muted: #888;
+    --accent-red: #6e1212;
+}
+
+.chronicles-container {
+    padding: 40px;
+}
+
+/* LIVRO */
+
+.book {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* PÁGINA */
+
+.page {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 30px;
+
+    background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 20px;
+
+    position: relative;
+}
+
+/* detalhe de "papel" */
+
+.page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("https://www.transparenttextures.com/patterns/old-wall.png");
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+/* IMAGEM */
+
+.page-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid var(--gold);
+}
+
+/* TEXTO */
+
+.page-content h2 {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    margin-bottom: 15px;
+}
+
+.page-content p {
+    line-height: 1.6;
+    color: var(--text-main);
+    text-align: justify;
+}
+
+.chronicle-quote {
+    margin-top: 20px;
+    padding: 15px;
+    border-left: 3px solid var(--gold);
+    background: rgba(197, 160, 89,0.05);
+    font-style: italic;
+    color: var(--gold-bright);
+    position: relative;
+}
+
+/* RESPONSIVO */
+
+@media (max-width: 900px) {
+    .page {
+        grid-template-columns: 1fr;
+    }
+
+    .page-image {
+        height: 250px;
+    }
+}

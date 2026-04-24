@@ -1,0 +1,157 @@
+.rpg-container {
+  width: 75vw;
+  display: flex;
+  height: 100vh;
+  background: #0b0b10;
+  color: #fff;
+  font-family: system-ui;
+}
+
+/* LEFT PANEL */
+.hero-list {
+  width: 25vw;
+  background: #12121a;
+  border-right: 1px solid #222;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.panel-title {
+  font-size: 14px;
+  opacity: 0.6;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+/* HERO ITEM */
+.hero-item {
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  background: #161620;
+  cursor: pointer;
+  transition: 0.2s;
+  border: 1px solid transparent;
+}
+
+.hero-item:hover {
+  transform: translateX(3px);
+  background: #1b1b28;
+}
+
+.hero-item.active {
+  border: 1px solid #f5c542;
+  background: #1a1a25;
+}
+
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.hero-name {
+  font-weight: 600;
+}
+
+.hero-level {
+  opacity: 0.7;
+}
+
+.hero-class {
+  font-size: 12px;
+  opacity: 0.6;
+  margin-top: 4px;
+}
+
+/* RIGHT PANEL */
+.hero-detail {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+/* HEADER */
+.hero-header {
+  margin-bottom: 20px;
+}
+
+.hero-title {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.hero-subtitle {
+  opacity: 0.6;
+  margin-top: 4px;
+}
+
+/* STATS */
+.stats-card {
+  display: flex;
+  gap: 20px;
+  padding: 16px;
+  background: #151522;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #222;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+}
+
+.stat strong {
+  font-size: 16px;
+}
+
+.stat.gold {
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+}
+
+.stat.gold img {
+  width: 18px;
+  height: 18px;
+}
+
+/* INVENTORY */
+.inventory-card {
+  background: #151522;
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.section-title {
+  font-size: 13px;
+  opacity: 0.6;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.inventory-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #222;
+}
+
+.inventory-item:last-child {
+  border-bottom: none;
+}
+
+.qty {
+  opacity: 0.6;
+}
+
+/* STATES */
+.empty-state,
+.loading-state,
+.empty-inventory {
+  opacity: 0.6;
+  padding: 20px;
+}

@@ -1,0 +1,27 @@
+.log-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.log-item {
+    background: rgba(20,20,25,0.9);
+    border-left: 3px solid var(--gold);
+    padding: 15px;
+    border-radius: 6px;
+    transition: 0.2s;
+}
+
+.log-item:hover {
+    background: rgba(30,30,35,0.9);
+}
+
+.log-time {
+    font-size: 0.75rem;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.log-text {
+    font-size: 0.9rem;
+}

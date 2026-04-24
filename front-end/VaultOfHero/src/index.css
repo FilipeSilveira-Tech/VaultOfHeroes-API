@@ -1,0 +1,222 @@
+:root {
+    --bg-dark: #0a0a0c;
+    --panel-bg: rgba(20, 20, 25, 0.92);
+    --gold: #c5a059;
+    --gold-bright: #fceabb;
+    --border-color: #3a2f22;
+    --text-main: #d1d1d1;
+    --text-muted: #888;
+    --accent-red: #6e1212;
+}
+
+/* RESET */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    font-family: 'Quicksand', sans-serif;
+    background: radial-gradient(circle at top, #1a1a22, #0a0a0c);
+    color: var(--text-main);
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+/* TEXTURA */
+
+.overlay-texture {
+    position: fixed;
+    inset: 0;
+    background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png');
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: 0;
+}
+
+
+/* MAIN */
+
+.main-content {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    padding: 40px;
+    margin-left: 260px;
+}
+
+/* TITLES */
+
+.glow-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    color: var(--gold);
+    margin-bottom: 25px;
+    padding-left: 15px;
+    border-left: 4px solid var(--gold);
+    text-shadow: 0 0 12px rgba(197, 160, 89, 0.3);
+}
+
+/* HERO GRID */
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+/* HERO CARD */
+
+.hero-card {
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: 0.25s;
+    position: relative;
+}
+
+.hero-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.hero-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--gold);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+
+/* IMAGE */
+
+.hero-image-container {
+    height: 260px;
+    overflow: hidden;
+    background: #000;
+}
+
+.hero-portrait {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    opacity: 0.85;
+    transition: 0.4s;
+}
+
+.hero-card:hover .hero-portrait {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* INFO */
+
+.hero-info {
+    padding: 18px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-class {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: var(--gold);
+}
+
+.hero-name {
+    margin: 6px 0;
+    font-family: 'Cinzel', serif;
+}
+
+.hero-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* LOJA */
+
+.market-container {
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* TABLE */
+
+.market-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.market-table th {
+    text-align: left;
+    padding: 15px;
+    font-family: 'Cinzel';
+    color: var(--gold);
+    background: rgba(0,0,0,0.4);
+}
+
+.market-table td {
+    padding: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.market-table tr:hover {
+    background: rgba(255,255,255,0.03);
+}
+
+/* ITEM ICON */
+
+.item-icon {
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+    border-radius: 4px;
+    border: 1px solid var(--gold);
+    background: #111;
+}
+
+/* GOLD */
+
+.gold-text {
+    color: #ffd700;
+    font-weight: bold;
+}
+
+/* BUTTON */
+
+.buy-btn {
+    background: linear-gradient(135deg, #6e1212, #a01a1a);
+    border: 1px solid var(--gold);
+    color: white;
+    font-family: 'Cinzel';
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.buy-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(160, 26, 26, 0.6);
+}
+
+/* RESPONSIVO */
+
+@media (max-width: 900px) {
+    .main-content {
+        padding: 20px;
+    }
+}

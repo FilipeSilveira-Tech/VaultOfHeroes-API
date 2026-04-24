@@ -1,0 +1,95 @@
+:root {
+    --bg-dark: #0a0a0c;
+    --panel-bg: rgba(20, 20, 25, 0.92);
+    --gold: #c5a059;
+    --gold-bright: #fceabb;
+    --border-color: #3a2f22;
+    --text-main: #d1d1d1;
+    --text-muted: #888;
+    --accent-red: #6e1212;
+}
+
+/* SIDEBAR */
+.sidebar-guild {
+    width: 260px;
+    height: 100vh;
+    padding: 20px;
+    background: linear-gradient(180deg, #1a1a1e, #0a0a0a);
+    border-right: 1px solid var(--border-color);
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.guild-banner {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.guild-banner img {
+    width: 135px;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 0 8px var(--gold));
+}
+
+.guild-banner h2 {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    margin: 0;
+}
+
+/* NAV */
+
+.medieval-nav button {
+   width: 100%;
+   text-align: left;
+
+   background: transparent;
+   border: 1px solid transparent;
+   outline: none;
+
+   color: var(--text-main);
+   font-family: 'Cinzel', serif;
+   font-size: 0.9rem;
+
+   padding: 12px;
+   margin-bottom: 10px;
+   border-radius: 6px;
+
+   cursor: pointer;
+
+   transition: all 0.25s ease;
+}
+
+.medieval-nav button:hover,
+.medieval-nav button.active {
+    position: relative;
+    border-color: var(--gold);
+    background: rgba(197, 160, 89, 0.08);
+    color: var(--gold-bright);
+    box-shadow: inset 0 0 12px rgba(197, 160, 89, 0.15);
+    transform: scale(0.97);
+}
+
+.medieval-nav button.active::before {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 20%;
+    height: 60%;
+    width: 3px;
+    background: var(--gold);
+    box-shadow: 0 0 10px var(--gold);
+}
+.medieval-nav button:focus-visible {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 2px rgba(197, 160, 89, 0.4);
+}
+
+@media (max-width: 900px) {
+    .sidebar-guild {
+        display: none;
+    }
+}

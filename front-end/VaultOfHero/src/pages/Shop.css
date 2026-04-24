@@ -1,0 +1,30 @@
+:root {
+    --bg-dark: #0a0a0c;
+    --panel-bg: rgba(20, 20, 25, 0.92);
+    --gold: #c5a059;
+    --gold-bright: #fceabb;
+    --border-color: #3a2f22;
+    --text-main: #d1d1d1;
+    --text-muted: #888;
+    --accent-red: #6e1212;
+}
+
+.shop-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.shop-controls button {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 6px 12px;
+    cursor: pointer;
+    font-family: 'Cinzel';
+}
+
+.shop-controls button:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+}
