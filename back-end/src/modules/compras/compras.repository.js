@@ -13,13 +13,13 @@ class VendaRespository {
     async executePurchase(heroi_id, item_id, quantidade, newGold, guild_id) {
         const db = await conectarBanco();
         await db.run("UPDATE Herois SET gold = ? WHERE id = ?", [newGold, heroi_id]);
-        await db.run("UPDATE Loja SET amount = amount - 1 WHERE id = ?", [item_id]);
+        await db.run("UPDATE Loja SET amount = amount - ? WHERE id = ?", [quantidade, item_id]);
 
         if (guild_id) {
             await db.run("UPDATE Guildas SET prestige = prestige + 1 WHERE id = ?", [guild_id]);
         }
 
-        console.log("[LOG] executarTransacaoComprar", {
+        console.log("[LOG] executePurchase | Respository", {
             heroi_id,
             item_id,
             quantidade,
@@ -54,6 +54,7 @@ class VendaRespository {
 
     async heroNewitem (heroi_id, item_id, item_name, quantidade) {
         const db = await conectarBanco();
+        console.log("[LOG] heroNewItem | Repository", { heroi_id, item_id, quantidade })
         const insertNewItem = await db.run(
             "INSERT INTO heroInventory (heroi_id, item_id, item_name, amount) VALUES (?, ?, ?, ?)",
             [heroi_id, item_id, item_name, quantidade],

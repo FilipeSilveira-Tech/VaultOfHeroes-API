@@ -4,10 +4,11 @@ import AppError from "../../utils/AppError.js";
 class heroesService {
     async listHeroes() {
         const {listHeroes} = await heroesRepository.listHeroes();
-
         if (!listHeroes) throw new AppError("Não foi encontrado heróis no banco de dados!", 404, {detalhes: "Banco de dados vázio!"});
 
-        return { list_heroes: listHeroes }
+        return { 
+            heroes: listHeroes,
+        }
     };
 
     async heroById(heroi_id) {
@@ -33,6 +34,33 @@ class heroesService {
 
         return { items }
     };
+
+    async listAllHeroesWithItems() {
+        try {
+            const data = await this.listHeroes();
+            const heroes = data.heroes;
+
+            const itemsNested = await Promise.all(
+                heroes.map(hero => this.heroInventory(hero.id))
+            );
+
+            const itemsMap = new Map();
+
+            heroes.forEach((hero, index) => {
+                itemsMap.set(hero.id, itemsNested[index]);
+            });
+
+            const heroesWithItems = heroes.map(hero => ({
+                ...hero,
+                items: itemsMap.get(hero.id) || []
+            }));
+
+            return { heroes: heroesWithItems }
+        } catch (error) {
+            console.error("Erro ao buscar dados: ", error);
+            throw new AppError("Erro interno do servidor", 500);
+        }
+    }
 }
 
 export default new heroesService();

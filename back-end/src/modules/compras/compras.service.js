@@ -33,9 +33,11 @@ class VendaService {
         const heroHasItem = await comprasRespositorie.validateInventoryHero(heroi_id, item_id);
 
         if (heroHasItem) {
+            console.log("[LOG] heroHasItem(TRUE): ", quantidade)
             await comprasRespositorie.itemUpdate(heroi_id, item_id, item_name, quantidade);
         } else {
-            await comprasRespositorie.heroNewitem(heroi_id, item_id, quantidade);
+            console.log("[LOG] heroHasItem(FALSE): ", quantidade)
+            await comprasRespositorie.heroNewitem(heroi_id, item_id, item_name, quantidade);
         }
 
         return {

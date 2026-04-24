@@ -1,11 +1,10 @@
 import heroesService from './heroes.service.js';
 
 export const listHeroes = async (req, res) => {
-    const validResult = await heroesService.listHeroes();
+    const validResultListHero = await heroesService.listAllHeroesWithItems();
 
     res.status(201).json({
-        message: "Lista de todos os corajosos heróis!",
-        ...validResult
+        ...validResultListHero
     });
 };
 

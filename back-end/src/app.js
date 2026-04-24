@@ -1,3 +1,4 @@
+import cors from "cors";
 import express from 'express';
 
 const app = express();
@@ -14,6 +15,11 @@ import guildsRoutes from './modules/guildas/guilds.routes.js'; // -> AQUI
 import itemsRoutes from './modules/items/items.routes.js'; 
 import comprasRoutes from './modules/compras/compras.routes.js';
 
+app.use(
+    cors({
+        origin: "http://localhost:5173"
+    })
+);
 app.get('/teste', (req, res) => { res.send('TUDO FUNCIONANDO ✅​') })
 app.use(heroesRoutes);
 app.use(guildsRoutes);
