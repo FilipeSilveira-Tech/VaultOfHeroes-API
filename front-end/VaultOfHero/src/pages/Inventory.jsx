@@ -10,7 +10,7 @@ export default function InventoryPage() {
   // load heroes
   useEffect(() => {
     async function load() {
-      const res = await fetch("http://localhost:3000/heroes");
+      const res = await fetch("https://vaultofheroes-api.onrender.com/heroes");
       const data = await res.json();
       setHeroes(data.heroes || []);
     }
@@ -24,7 +24,7 @@ export default function InventoryPage() {
 
     async function loadHero() {
       const res = await fetch(
-        `http://localhost:3000/heroes/${selectedHeroId}`
+        `https://vaultofheroes-api.onrender.com/heroes/${selectedHeroId}`
       );
       const data = await res.json();
       setHeroData(data);

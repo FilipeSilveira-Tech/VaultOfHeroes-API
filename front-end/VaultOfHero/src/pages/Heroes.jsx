@@ -11,7 +11,7 @@ export default function HeroDashboard() {
   // LOAD HEROES
   useEffect(() => {
     async function loadHeroes() {
-      const res = await fetch("http://localhost:3000/heroes");
+      const res = await fetch("https://vaultofheroes-api.onrender.com/heroes");
       const data = await res.json();
 
       setHeroes(Array.isArray(data) ? data : data.heroes || []);
@@ -29,7 +29,7 @@ export default function HeroDashboard() {
 
       try {
         const res = await fetch(
-          `http://localhost:3000/heroes/${selectedHeroId}`
+          `https://vaultofheroes-api.onrender.com/heroes/${selectedHeroId}`
         );
 
         const data = await res.json();

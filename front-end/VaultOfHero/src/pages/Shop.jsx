@@ -16,7 +16,7 @@ function Shop() {
       setLoading(true);
 
       try {
-        const res = await fetch("http://localhost:3000/items");
+        const res = await fetch("https://vaultofheroes-api.onrender.com/items");
         const data = await res.json();
 
         setItems(Array.isArray(data) ? data : data.items || []);
