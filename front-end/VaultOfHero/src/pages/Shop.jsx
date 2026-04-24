@@ -1,55 +1,95 @@
-import { useEffect } from "react";
-import { useState } from "react";
-import MarketTable from "../components/MarketTable.jsx";
-import './Shop.css';
-
-const mockItems = [
-  {
-    id: 1,
-    name: "Lâmina de Ébano",
-    type: "weapon",
-    base_price: 450,
-    sold_value: 220,
-    amount: 3
-  },
-  {
-    id: 2,
-    name: "Poção de Vida",
-    type: "consumable",
-    base_price: 50,
-    sold_value: 20,
-    amount: 10
-  }
-];
+import { useEffect, useState } from "react";
+import { itemImages } from '../utils/imageMap.js'
+import "./Shop.css";
 
 function Shop() {
-    useEffect(() => {
-        document.title = "Vault of Heroes | Loja";
-    }, []);
+  useEffect(() => {
+    document.title = "Vault of Heroes | Loja";
+  }, []);
 
-    const [items] = useState(mockItems);
-    const [filter, setFilter] = useState("all");
+  const [items, setItems] = useState([]);
+  const [filter, setFilter] = useState("all");
+  const [loading, setLoading] = useState(false);
 
-    const filteredItems = filter === "all"
-        ? items
-        : items.filter(i => i.type === filter);
+  useEffect(() => {
+    async function loadItems() {
+      setLoading(true);
 
-    return (
-        <>
-            <h1 className="glow-title">💰🧙‍♂️ Loja do Velho Mago </h1>
+      try {
+        const res = await fetch("http://localhost:3000/items");
+        const data = await res.json();
 
-            <div className="shop-controls">
-                <button onClick={() => setFilter("all")}>Todos</button>
-                <button onClick={() => setFilter("weapon")}>Armas</button>
-                <button onClick={() => setFilter("armor")}>Armaduras</button>
-                <button onClick={() => setFilter("consumable")}>Consumíveis</button>
-                <button onClick={() => setFilter("accessory")}>Acessórios</button>
-                <button onClick={() => setFilter("utility")}>Utilitários</button>
+        setItems(Array.isArray(data) ? data : data.items || []);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadItems();
+  }, []);
+
+  const filteredItems =
+    filter === "all"
+      ? items
+      : items.filter(i => i.type === filter);
+
+  return (
+    <div className="shop-container">
+
+      {/* HEADER */}
+      <div className="shop-header">
+        <h1>💰 Loja do Velho Mago</h1>
+        <p>Itens raros circulam entre sombras e poeira...</p>
+      </div>
+
+      {/* FILTERS */}
+      <div className="shop-filters">
+        {["all", "weapon", "armor", "consumable", "accessory", "utility"].map(type => (
+          <button
+            key={type}
+            className={filter === type ? "active" : ""}
+            onClick={() => setFilter(type)}
+          >
+            {type}
+          </button>
+        ))}
+      </div>
+
+      {/* LOADING */}
+      {loading && <div className="loading">Carregando mercadorias...</div>}
+
+      {/* GRID */}
+      <div className="shop-grid">
+
+        {filteredItems.map(item => (
+          <div key={item.id} className={`item-card ${item.type}`}>
+
+            {/* ICON */}
+            <div className="item-icon-box">
+              <div className="item-icon-placeholder">
+                <img src={itemImages[item.type]} alt={item.name} />
+              </div>
             </div>
 
-            <MarketTable items={filteredItems} />
-        </>
-    );
+            {/* INFO */}
+            <div className="item-info">
+              <div className="item-name">{item.name}</div>
+              <div className="item-type">{item.type}</div>
+            </div>
+
+            {/* PRICE */}
+            <div className="item-price">
+              <span className="gold">🪙</span>
+              {item.base_price}
+            </div>
+
+          </div>
+        ))}
+
+      </div>
+
+    </div>
+  );
 }
 
 export default Shop;

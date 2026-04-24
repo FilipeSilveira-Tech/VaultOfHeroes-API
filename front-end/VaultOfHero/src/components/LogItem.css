@@ -1,27 +1,77 @@
-.log-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+.ds-log-item {
+  display: flex;
+  gap: 12px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+
+  background: rgba(10, 10, 15, 0.6);
+  border-left: 2px solid rgba(255, 255, 255, 0.05);
+
+  transition: 0.2s;
+  animation: fadeIn 0.25s ease;
 }
 
-.log-item {
-    background: rgba(20,20,25,0.9);
-    border-left: 3px solid var(--gold);
-    padding: 15px;
-    border-radius: 6px;
-    transition: 0.2s;
+.ds-log-item:hover {
+  border-left: 2px solid rgba(245, 197, 66, 0.6);
+  background: rgba(20, 20, 30, 0.7);
+  transform: translateX(4px);
 }
 
-.log-item:hover {
-    background: rgba(30,30,35,0.9);
+/* tempo discreto */
+.ds-log-time {
+  font-size: 11px;
+  opacity: 0.4;
+  min-width: 60px;
 }
 
-.log-time {
-    font-size: 0.75rem;
-    color: #888;
-    margin-bottom: 5px;
+/* mensagem principal */
+.ds-log-message {
+  font-size: 13px;
+  letter-spacing: 0.3px;
 }
 
-.log-text {
-    font-size: 0.9rem;
+/* hierarquia estilo RPG */
+.ds-hero {
+  color: #c9d1ff;
+  font-weight: 600;
 }
+
+.ds-action {
+  opacity: 0.7;
+  margin: 0 6px;
+}
+
+.ds-amount {
+  color: #f5c542;
+  font-weight: 600;
+}
+
+.ds-item {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* animação leve */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ds-log-item:first-child {
+  border-left: 2px solid rgba(245, 197, 66, 0.9);
+  box-shadow: 0 0 12px rgba(245, 197, 66, 0.2);
+}
+
+.ds-log-item:not(:first-child) {
+  opacity: 0.85;
+}
+
+.ds-log-item.Compra { border-left-color: #f05656; }
+.ds-log-item.Venda { border-left-color: #76ff3f; }
+.ds-log-item.system { border-left-color: #7aa2ff; }

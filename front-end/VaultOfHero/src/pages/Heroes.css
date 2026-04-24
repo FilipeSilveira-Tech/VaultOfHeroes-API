@@ -1,10 +1,32 @@
 .rpg-container {
-  width: 75vw;
   display: flex;
   height: 100vh;
-  background: #0b0b10;
+  width: 75vw;
+  background: radial-gradient(circle at top, #1a1a2e 0%, #0b0b10 60%, #07070c 100%);
   color: #fff;
   font-family: system-ui;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-item,
+.stats-card,
+.inventory-card {
+  background: rgba(20, 20, 35, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,0.4),
+    0 8px 30px rgba(0,0,0,0.6);
+}
+
+.hero-item {
+  transition: 0.25s ease;
+}
+
+.hero-item:hover {
+  transform: translateX(6px) scale(1.02);
+  box-shadow: 0 0 20px rgba(120, 120, 255, 0.15);
 }
 
 /* LEFT PANEL */
@@ -32,16 +54,19 @@
   cursor: pointer;
   transition: 0.2s;
   border: 1px solid transparent;
+  transition: 0.25s ease;
 }
 
 .hero-item:hover {
-  transform: translateX(3px);
-  background: #1b1b28;
+  transform: translateX(6px) scale(1.02);
+  box-shadow: 0 0 20px rgba(120, 120, 255, 0.15);
 }
 
 .hero-item.active {
-  border: 1px solid #f5c542;
-  background: #1a1a25;
+  border: 1px solid rgba(245, 197, 66, 0.8);
+  box-shadow:
+    0 0 12px rgba(245, 197, 66, 0.35),
+    0 0 40px rgba(245, 197, 66, 0.15);
 }
 
 .hero-top {
@@ -77,8 +102,9 @@
 }
 
 .hero-title {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 700;
+  text-shadow: 0 0 12px rgba(120, 120, 255, 0.25);
 }
 
 .hero-subtitle {
@@ -131,6 +157,7 @@
   opacity: 0.6;
   margin-bottom: 10px;
   letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
 }
 
 .inventory-item {
@@ -155,3 +182,51 @@
   opacity: 0.6;
   padding: 20px;
 }
+
+/* PARTICLES  */
+.particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* cada partícula */
+.particles span {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(245, 197, 66, 0.6);
+  border-radius: 50%;
+  animation: floatUp linear infinite;
+  box-shadow: 0 0 10px rgba(245, 197, 66, 0.4);
+}
+
+/* randomização manual leve */
+.particles span:nth-child(odd) {
+  background: rgba(120, 120, 255, 0.4);
+}
+
+/* animação */
+@keyframes floatUp {
+  from {
+    transform: translateY(100vh) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-10vh) translateX(20px);
+    opacity: 0;
+  }
+}
+
+/* posicionamento aleatório simples */
+.particles span:nth-child(1) { left: 10%; animation-duration: 12s; }
+.particles span:nth-child(2) { left: 20%; animation-duration: 18s; }
+.particles span:nth-child(3) { left: 35%; animation-duration: 14s; }
+.particles span:nth-child(4) { left: 50%; animation-duration: 20s; }
+.particles span:nth-child(5) { left: 70%; animation-duration: 16s; }
+.particles span:nth-child(6) { left: 85%; animation-duration: 22s; }
+/* continua padrão simples... */

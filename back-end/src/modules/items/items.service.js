@@ -3,11 +3,11 @@ import AppError from "../../utils/AppError.js";
 
 class itemService {
     async listItems() {
-        const {listenItems} = await itemsRepository.searchAllItems();
+        const {items} = await itemsRepository.searchAllItems();
 
-        if (!listenItems) throw new AppError("Não foi encontrado itens no banco de dados!", 404, {detalhes: "Banco de dados vázio!"});
+        if (!items) throw new AppError("Não foi encontrado itens no banco de dados!", 404, {detalhes: "Banco de dados vázio!"});
         
-        return { list_items: listenItems}
+        return { items}
     };
 
     async topExpensiveItems() {

@@ -1,24 +1,47 @@
 
 import { useEffect, useState } from "react";
 import LogItem from "../components/LogItem";
+import "./Log.css";
 
 function Logs() {
-    const [logs] = useState([
-        {
-            id: 1,
-            hero: "Thalric",
-            item: "Poção de Vida",
-            amount: 3,
-            date: "2026-04-24T04:55:20.968Z"
-        }
-    ])
-
     useEffect(() => {
         document.title = "Vault of Heroes | Logs";
     }, []);
+
+    const [logs, setLogs] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        async function loadLogs() {
+            setLoading(true)
+            try {
+                const res = await fetch("http://localhost:3000/logs");
+
+                if (!res.ok) {
+                    throw new Error("Erro ao buscar logs")
+                }
+
+                const data = await res.json();
+                setLogs(Array.isArray(data) ? data : data.logs || []);
+            } catch (err) {
+                console.error(err);
+                setLogs([]);
+            } finally {
+                setLoading(false);
+            }
+        }
+        loadLogs();
+    }, []);
+
     return (
         <>
             <h1 className="glow-title">📜 Logs da Loja</h1>
+
+            {loading && (
+                <div className="loading-state">
+                    Carregando...
+                </div>
+            )}
 
             <div className="log-container">
                 {logs.map(log => (

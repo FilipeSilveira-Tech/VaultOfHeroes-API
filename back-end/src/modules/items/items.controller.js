@@ -5,7 +5,6 @@ export const listItemsShop = async (req, res) => {
     const validResult = await itemsService.listItems();
 
     res.status(201).json({
-        message: "Lista de todos itens da loja do Velho Mago! 🧙‍♂️",
         ...validResult
     });
 };

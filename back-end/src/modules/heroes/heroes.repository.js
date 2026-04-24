@@ -25,7 +25,7 @@ class heroesRepository {
 
     async heroInventory(heroi_id) {
         const db = await conectarBanco();
-        const items = await db.all("SELECT inventory_id, item_id, item_name, amount FROM heroInventory WHERE heroi_id = ?", [heroi_id]);
+        const items = await db.all("SELECT inventory_id, item_id, item_name, item_type, amount FROM heroInventory WHERE heroi_id = ?", [heroi_id]);
 
         return { items }
     }

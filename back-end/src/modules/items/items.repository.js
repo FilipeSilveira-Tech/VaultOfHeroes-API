@@ -4,8 +4,8 @@ import AppError from "../../utils/AppError.js";
 class itemsRepository {
     async searchAllItems() {
         const db = await conectarBanco();
-        const listenItems = await db.all("SELECT * FROM Loja");
-        return { listenItems };
+        const items = await db.all("SELECT * FROM Loja");
+        return { items };
     };
 
     async topExpensiveItems() {

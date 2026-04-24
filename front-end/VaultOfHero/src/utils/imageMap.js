@@ -1,5 +1,5 @@
 export const itemImages = {
-    accessory: new URL("../assets/itens/acessory.png", import.meta.url).href,
+    accessory: new URL("../assets/itens/accessory.png", import.meta.url).href,
     armor: new URL("../assets/itens/armor.png", import.meta.url).href,
     consumable: new URL("../assets/itens/consumable.png", import.meta.url).href,
     utility: new URL("../assets/itens/utility.png", import.meta.url).href,

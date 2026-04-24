@@ -67,7 +67,7 @@ export default function HeroDashboard() {
               >
                 <div className="hero-top">
                   <span className="hero-name">
-                    {hero.name}
+                    {hero.id} - {hero.name}
                   </span>
 
                   <span className="hero-level">
@@ -151,6 +151,11 @@ export default function HeroDashboard() {
             </>
           )}
         </div>
+      </div>
+      <div className="particles">
+        {Array.from({ length: 25 }).map((_, i) => (
+          <span key={i}></span>
+        ))}
       </div>
     </>
   );
