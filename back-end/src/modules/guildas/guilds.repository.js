@@ -1,32 +1,27 @@
-import conectarBanco from "../../database/conectarBanco.js";
+import { pool } from '../../database/postgres.js';
 import AppError from "../../utils/AppError.js";
-import heroesRepository from "../heroes/heroes.repository.js";
 
 class guildRepository {
     // TOP 5: Maiores Prestigío
     async topPrestigeGuilds() {
-        const db = await conectarBanco();
-        const topGuilds = await db.all("SELECT * FROM Guildas ORDER BY prestige DESC LIMIT 5");
-        return { topGuilds }
+        const topGuilds = await pool.query("SELECT * FROM Guildas ORDER BY prestige DESC LIMIT 5");
+        return topGuilds.rows
     };
 
     // TOP 5: Quantidade Membros
     async topMembersGuilds() {
-        const db = await conectarBanco();
-        const topGuilds = await db.all("SELECT * FROM Guildas ORDER BY members DESC LIMIT 5");
-        return { topGuilds }
+        const topGuilds = await pool.query("SELECT * FROM Guildas ORDER BY members DESC LIMIT 5");
+        return topGuilds.rows
     };
 
     async listGuilds() {
-        const db = await conectarBanco();
-        const listGuilds = await db.all("SELECT * FROM Guildas");
-        return { listGuilds }
+        const listGuilds = await pool.query("SELECT * FROM Guildas");
+        return listGuilds.rows
     };
 
     async searchById(guild_id) {
-        const db = await conectarBanco();
-        const listGuilds = await db.get("SELECT * FROM Guildas WHERE id = ?", [guild_id]);
-        return { listGuilds }
+        const listGuilds = await pool.query("SELECT * FROM Guildas WHERE id = $1", [guild_id]);
+        return listGuilds.rows[0]
     };
 }
 

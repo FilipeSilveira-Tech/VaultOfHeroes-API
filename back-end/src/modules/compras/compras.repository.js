@@ -1,71 +1,68 @@
-import conectarBanco from '../../database/conectarBanco.js';
+import { pool } from '../../database/postgres.js';
 import AppError from '../../utils/AppError.js';
 
 class VendaRespository {
     async serachDataForSale(heroi_id, item_id) {
-        const db = await conectarBanco();
-
-        const heroiReq = await db.get("SELECT * FROM Herois WHERE id = ?", [heroi_id]);
-        const itemReq = await db.get("SELECT * FROM Loja WHERE id = ?", [item_id]);
-        return { heroi: heroiReq, item: itemReq, item_quantidade: itemReq.amount || 0, item_name: itemReq.name }
+        try {
+            const heroiReq = await pool.query("SELECT * FROM Herois WHERE id = $1", [heroi_id]);
+            const itemReq = await pool.query("SELECT * FROM Loja WHERE id = $1", [item_id]);
+            return { heroi: heroiReq.rows[0], item: itemReq.rows[0], item_quantidade: itemReq.rows[0]?.amount || 0, item_name: itemReq.rows[0]?.name }
+        } catch (error) {
+            throw new AppError("Erro ao buscar dados da venda, 500");
+        }
     }
 
     async executePurchase(heroi_id, item_id, quantidade, newGold, guild_id) {
-        const db = await conectarBanco();
-        await db.run("UPDATE Herois SET gold = ? WHERE id = ?", [newGold, heroi_id]);
-        await db.run("UPDATE Loja SET amount = amount - ? WHERE id = ?", [quantidade, item_id]);
+        const client = await pool.connect();
 
-        if (guild_id) {
-            await db.run("UPDATE Guildas SET prestige = prestige + 1 WHERE id = ?", [guild_id]);
+        try {
+            await client.query("BEGIN");
+
+            await client.query("UPDATE Herois SET gold = $1 WHERE id = $2", [newGold, heroi_id]);
+            await client.query("UPDATE Loja SET amount = amount - $1 WHERE id = $2", [quantidade, item_id]);
+
+            if (guild_id) {
+                await client.query("UPDATE Guildas SET prestige = prestige + 1 WHERE id = $1", [guild_id]);
+            }
+
+            await client.query("COMMIT");
+        } catch (error) {
+            await client.query("ROLLBACK");
+            throw new AppError("Erro na compra", 500);
+        } finally {
+            client.release()
         }
-
-        console.log("[LOG] executePurchase | Respository", {
-            heroi_id,
-            item_id,
-            quantidade,
-            newGold,
-            guild_id,
-            data: new Date().toISOString()
-        })
     };
 
     async saleLog(heroi_id, item_id, item_name, quantidade) {
-        const db = await conectarBanco();
         const now = new Date();
-        const log = await db.run(
-            "INSERT INTO lojaVendas (heroi_id, item_id, item_name, amount, data_compra) VALUES (?, ?, ?, ?, ?)",
-            [heroi_id, item_id, item_name, quantidade, now.toISOString()]
+        const log = await pool.query(
+            "INSERT INTO lojaVendas (heroi_id, item_id, item_name, amount, data_compra) VALUES ($1, $2, $3, $4, NOW())",
+            [heroi_id, item_id, item_name, quantidade]
         );
 
-        return log.lastID;
-        console.log("[LOG] ID Compra: ", log.lastID);
+        return log.rows[0].id;
     };
 
     async validateInventoryHero(heroi_id, item_id) {
-        const db = await conectarBanco();
-
-        const inventoryValidate = await db.get(
-            "SELECT 1 FROM heroInventory WHERE heroi_id = ? AND item_id = ? LIMIT 1",
+        const inventoryValidate = await pool.query(
+            "SELECT 1 FROM heroInventory WHERE heroi_id = $1 AND item_id = $2 LIMIT 1",
             [heroi_id, item_id]
         )
 
-        return inventoryValidate;
+        return inventoryValidate.rows > 0;
     };
 
-    async heroNewitem (heroi_id, item_id, item_name, quantidade) {
-        const db = await conectarBanco();
-        console.log("[LOG] heroNewItem | Repository", { heroi_id, item_id, quantidade })
-        const insertNewItem = await db.run(
-            "INSERT INTO heroInventory (heroi_id, item_id, item_name, amount) VALUES (?, ?, ?, ?)",
+    async heroNewitem (heroi_id, item_id, item_name, quantidade) {        
+        const insertNewItem = await pool.query(
+            "INSERT INTO heroInventory (heroi_id, item_id, item_name, amount) VALUES ($1, $2, $3, $4)",
             [heroi_id, item_id, item_name, quantidade],
         );
     }
 
-    async itemUpdate (heroi_id, item_id, quantidade) {
-        const db = await conectarBanco();
-
-        const updateItem = await db.run(
-            "UPDATE heroInventory SET amount = amount + ? WHERE heroi_id = ? AND item_id = ?",
+    async itemUpdate (heroi_id, item_id, quantidade) {        
+        const updateItem = await pool.query(
+            "UPDATE heroInventory SET amount = amount + $1 WHERE heroi_id = $2 AND item_id = $3",
             [quantidade, heroi_id, item_id]
         );
     }

@@ -1,33 +1,29 @@
-import conectarBanco from "../../database/conectarBanco.js";
+import { pool } from '../../database/postgres.js';
 import AppError from "../../utils/AppError.js";
 
 class heroesRepository {
     async listHeroes() {
-        const db = await conectarBanco();
-        const listHeroes = await db.all("SELECT * FROM Herois");
+        const listHeroes = await pool.query("SELECT * FROM Herois");
 
-        return { listHeroes }
+        return listHeroes.rows;
     };
 
     async searchById(heroi_id) {
-        const db = await conectarBanco();
-        const hero = await db.get("SELECT * FROM Herois WHERE id = ?", [heroi_id]);
+        const hero = await pool.query("SELECT * FROM Herois WHERE id = $1", [heroi_id]);
 
-        return { hero }
+        return hero.rows[0];
     };
 
     async topRichHeroes() {
-        const db = await conectarBanco();
-        const topHeroes = await db.all("SELECT * FROM Herois ORDER BY gold DESC LIMIT 10");
+        const topHeroes = await pool.query("SELECT * FROM Herois ORDER BY gold DESC LIMIT 10");
 
-        return { topHeroes }
+        return topHeroes.rows;
     };
 
     async heroInventory(heroi_id) {
-        const db = await conectarBanco();
-        const items = await db.all("SELECT inventory_id, item_id, item_name, item_type, amount FROM heroInventory WHERE heroi_id = ?", [heroi_id]);
+        const items = await pool.query("SELECT inventory_id, item_id, item_name, item_type, amount FROM heroInventory WHERE heroi_id = $1", [heroi_id]);
 
-        return { items }
+        return items.rows;
     }
 };
 

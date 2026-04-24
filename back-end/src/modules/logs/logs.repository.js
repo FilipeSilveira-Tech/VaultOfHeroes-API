@@ -1,10 +1,9 @@
-import conectarBanco from "../../database/conectarBanco.js";
+import { pool } from '../../database/postgres.js';
 
 class logsRepository {
     async searchAllLogs() {
-        const db = await conectarBanco();
-        const logs = await db.all("SELECT * FROM lojaVendas");
-        return { logs }
+        const logs = await pool.query("SELECT * FROM lojaVendas");
+        return logs.rows;
     };
 }
 
