@@ -11,11 +11,11 @@ class heroesService {
     };
 
     async heroById(heroi_id) {
-        const {heroi} = await heroesRepository.searchById(heroi_id);
+        const {hero} = await heroesRepository.searchById(heroi_id);
 
-        if (!heroi) throw new AppError("Não foi encontrado o herói!", 404, {heroi_id: heroi_id});
+        if (!hero) throw new AppError("Não foi encontrado o herói!", 404, {heroi_id: heroi_id});
 
-        return { heroi }
+        return { hero }
     };
 
     async topRichHeroes() {
@@ -24,6 +24,14 @@ class heroesService {
         if (!topHeroes) throw new AppError("Não foi encontrado o top herói ricos!", 404, {detalhes: "Banco de dados vázio!"});
 
         return { topHeroes }
+    };
+
+    async heroInventory(heroi_id) {
+        const { items } = await heroesRepository.heroInventory(heroi_id)
+
+        if (!items) return "[]";
+
+        return { items }
     };
 }
 

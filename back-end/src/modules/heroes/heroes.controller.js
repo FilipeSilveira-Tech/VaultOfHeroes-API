@@ -11,11 +11,12 @@ export const listHeroes = async (req, res) => {
 
 export const heroById = async (req, res) => {
     console.log("[LOG] Controller: ", req.params.id)
-    const validResult = await heroesService.heroById(req.params.id);
+    const validResultHero = await heroesService.heroById(req.params.id);
+    const validResultInventory = await heroesService.heroInventory(req.params.id);
 
     res.status(201).json({
-        message: `Aqui estão as informações do herói ID: ${req.params.id}`,
-        ...validResult
+        ...validResultHero,
+        ...validResultInventory
     });
 };
 
@@ -27,3 +28,12 @@ export const listRichHeroes = async (req, res) => {
         ...validResult
     });
 };
+
+export const heroInventory = async (req, res) => {
+    const validResult = await heroesService.heroInventory(req.params.id);
+
+    res.status(201).json({
+        heroId: Number(req.params.id),
+        ...validResult
+    })
+}

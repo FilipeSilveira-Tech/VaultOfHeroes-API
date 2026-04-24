@@ -7,18 +7,13 @@ class VendaRespository {
 
         const heroiReq = await db.get("SELECT * FROM Herois WHERE id = ?", [heroi_id]);
         const itemReq = await db.get("SELECT * FROM Loja WHERE id = ?", [item_id]);
-        return { heroi: heroiReq, item: itemReq, item_quantidade: itemReq.amount || 0}
+        return { heroi: heroiReq, item: itemReq, item_quantidade: itemReq.amount || 0, item_name: itemReq.name }
     }
 
     async executePurchase(heroi_id, item_id, quantidade, newGold, guild_id) {
         const db = await conectarBanco();
         await db.run("UPDATE Herois SET gold = ? WHERE id = ?", [newGold, heroi_id]);
         await db.run("UPDATE Loja SET amount = amount - 1 WHERE id = ?", [item_id]);
-
-        const vendaReq = await db.run(
-            "INSERT INTO lojaVendas (heroi_id, item_id, amount, data_compra) VALUES (?, ?, ?, ?)",
-            [heroi_id, item_id, quantidade, new Date().toISOString()]
-        );
 
         if (guild_id) {
             await db.run("UPDATE Guildas SET prestige = prestige + 1 WHERE id = ?", [guild_id]);
@@ -34,12 +29,12 @@ class VendaRespository {
         })
     };
 
-    async saleLog(heroi_id, item_id, quantidade) {
+    async saleLog(heroi_id, item_id, item_name, quantidade) {
         const db = await conectarBanco();
         const now = new Date();
         const log = await db.run(
-            "INSERT INTO lojaVendas (heroi_id, item_id, amount, data_compra) VALUES (?, ?, ?, ?)",
-            [heroi_id, item_id, quantidade, now.toISOString()]
+            "INSERT INTO lojaVendas (heroi_id, item_id, item_name, amount, data_compra) VALUES (?, ?, ?, ?, ?)",
+            [heroi_id, item_id, item_name, quantidade, now.toISOString()]
         );
 
         return log.lastID;
@@ -57,11 +52,11 @@ class VendaRespository {
         return inventoryValidate;
     };
 
-    async heroNewitem (heroi_id, item_id, quantidade) {
+    async heroNewitem (heroi_id, item_id, item_name, quantidade) {
         const db = await conectarBanco();
         const insertNewItem = await db.run(
-            "INSERT INTO heroInventory (heroi_id, item_id, amount) VALUES (?, ?, ?)",
-            [heroi_id, item_id, quantidade],
+            "INSERT INTO heroInventory (heroi_id, item_id, item_name, amount) VALUES (?, ?, ?, ?)",
+            [heroi_id, item_id, item_name, quantidade],
         );
     }
 

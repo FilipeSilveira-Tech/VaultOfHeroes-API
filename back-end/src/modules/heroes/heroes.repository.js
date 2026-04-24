@@ -11,9 +11,9 @@ class heroesRepository {
 
     async searchById(heroi_id) {
         const db = await conectarBanco();
-        const heroi = await db.get("SELECT * FROM Herois WHERE id = ?", [heroi_id]);
+        const hero = await db.get("SELECT * FROM Herois WHERE id = ?", [heroi_id]);
 
-        return { heroi }
+        return { hero }
     };
 
     async topRichHeroes() {
@@ -22,6 +22,13 @@ class heroesRepository {
 
         return { topHeroes }
     };
+
+    async heroInventory(heroi_id) {
+        const db = await conectarBanco();
+        const items = await db.all("SELECT inventory_id, item_id, item_name, amount FROM heroInventory WHERE heroi_id = ?", [heroi_id]);
+
+        return { items }
+    }
 };
 
 export default new heroesRepository();

@@ -3,7 +3,7 @@ import AppError from '../../utils/AppError.js';
 
 class VendaService {
     async realizarCompra(heroi_id, item_id, quantidade) {
-        const { heroi, item,item_quantidade } = await comprasRespositorie.serachDataForSale(heroi_id, item_id);
+        const { heroi, item, item_quantidade, item_name } = await comprasRespositorie.serachDataForSale(heroi_id, item_id);
 
         if (!heroi) throw new AppError("Heroi não encontrado", 404, {heroi_id: heroi_id});
         if (!item) throw new AppError("Item não encontrado", 404, {item_id: item_id});
@@ -26,13 +26,14 @@ class VendaService {
         const log = await comprasRespositorie.saleLog(
             heroi_id,
             item_id,
+            item_name,
             quantidade
         )
 
         const heroHasItem = await comprasRespositorie.validateInventoryHero(heroi_id, item_id);
 
         if (heroHasItem) {
-            await comprasRespositorie.itemUpdate(heroi_id, item_id, quantidade);
+            await comprasRespositorie.itemUpdate(heroi_id, item_id, item_name, quantidade);
         } else {
             await comprasRespositorie.heroNewitem(heroi_id, item_id, quantidade);
         }
@@ -45,7 +46,7 @@ class VendaService {
             },
             detalhe_compra: {
                 transacao_id: log,
-                item_nome: item.name,
+                item_nome: item_name,
                 item_type: item.type,
                 item_price: item.base_price,
                 quantidade: quantidade,
