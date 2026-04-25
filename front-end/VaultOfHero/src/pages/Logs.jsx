@@ -15,7 +15,7 @@ function Logs() {
         async function loadLogs() {
             setLoading(true)
             try {
-                const res = await fetch("https://vaultofheroes-api.onrender.com/logs");
+                const res = await fetch("vault-of-heroes-api-hj83.vercel.app/logs");
 
                 if (!res.ok) {
                     throw new Error("Erro ao buscar logs")

@@ -18,7 +18,7 @@ import logsRoutes from "./modules/logs/logs.routes.js";
 
 app.use(
     cors({
-        origin: ["https://vaultofheroes-api.onrender.com"]
+        origin: ["vault-of-heroes-api-hj83.vercel.app"]
     })
 );
 app.get('/teste', (req, res) => { res.send('TUDO FUNCIONANDO ✅​') })

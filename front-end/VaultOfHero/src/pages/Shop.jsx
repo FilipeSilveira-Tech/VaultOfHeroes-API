@@ -16,7 +16,7 @@ function Shop() {
       setLoading(true);
 
       try {
-        const res = await fetch("https://vaultofheroes-api.onrender.com/items");
+        const res = await fetch("vault-of-heroes-api-hj83.vercel.app/items");
         const data = await res.json();
 
         setItems(Array.isArray(data) ? data : data.items || []);
