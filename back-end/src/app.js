@@ -18,7 +18,7 @@ import logsRoutes from "./modules/logs/logs.routes.js";
 
 app.use(
     cors({
-        origin: ["vault-of-heroes-api-hj83.vercel.app"]
+        origin: ["https://vault-of-heroes-api.vercel.app"]
     })
 );
 app.get('/teste', (req, res) => { res.send('TUDO FUNCIONANDO ✅​') })

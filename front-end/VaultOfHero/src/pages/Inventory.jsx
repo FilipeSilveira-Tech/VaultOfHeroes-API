@@ -10,7 +10,7 @@ export default function InventoryPage() {
   // load heroes
   useEffect(() => {
     async function load() {
-      const res = await fetch("vault-of-heroes-api-hj83.vercel.app/heroes");
+      const res = await fetch("https://vault-of-heroes-api-hj83.vercel.app/heroes");
       const data = await res.json();
       setHeroes(data.heroes || []);
     }
@@ -24,7 +24,7 @@ export default function InventoryPage() {
 
     async function loadHero() {
       const res = await fetch(
-        `vault-of-heroes-api-hj83.vercel.app/heroes/${selectedHeroId}`
+        `https://vault-of-heroes-api-hj83.vercel.app/heroes/${selectedHeroId}`
       );
       const data = await res.json();
       setHeroData(data);

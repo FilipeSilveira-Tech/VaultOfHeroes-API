@@ -11,7 +11,7 @@ export default function HeroDashboard() {
   // LOAD HEROES
   useEffect(() => {
     async function loadHeroes() {
-      const res = await fetch("vault-of-heroes-api-hj83.vercel.app/heroes");
+      const res = await fetch("https://vault-of-heroes-api-hj83.vercel.app/heroes");
       const data = await res.json();
 
       setHeroes(Array.isArray(data) ? data : data.heroes || []);
@@ -29,7 +29,7 @@ export default function HeroDashboard() {
 
       try {
         const res = await fetch(
-          `vault-of-heroes-api-hj83.vercel.app/heroes/${selectedHeroId}`
+          `https://vault-of-heroes-api-hj83.vercel.app/heroes/${selectedHeroId}`
         );
 
         const data = await res.json();
